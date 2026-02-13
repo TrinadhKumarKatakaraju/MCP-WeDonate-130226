@@ -61,7 +61,9 @@ function App() {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setUserRole(docSnap.data().role);
+          const role = docSnap.data().role;
+          setUserRole(role);
+          console.log("User role:", role);
         } else {
           console.log("No such document!");
         }
@@ -105,11 +107,8 @@ function App() {
               Food Donation Platform
             </Link>
           </Typography>
-          {user && userRole === 'donor' && (
-            <Button color="inherit" component={Link} to="/donor-dashboard" sx={{ color: 'white' }}>Dashboard</Button>
-          )}
-          {user && userRole === 'ngo' && (
-            <Button color="inherit" component={Link} to="/ngo-dashboard" sx={{ color: 'white' }}>Dashboard</Button>
+          {user && (userRole === 'donor' || userRole === 'ngo') && (
+            <Button color="inherit" component={Link} to={userRole === 'donor' ? "/donor-dashboard" : "/ngo-dashboard"} sx={{ color: 'white' }}>Dashboard</Button>
           )}
           <Button color="inherit" component={Link} to="/donor" sx={{ color: 'white' }}>Donor</Button>
           <Button color="inherit" component={Link} to="/ngo" sx={{ color: 'white' }}>NGO</Button>
@@ -145,7 +144,7 @@ function App() {
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
           color: 'white'
       }}>
-          <Typography variant="body2">&copy; {new Date().getFullYear()} Food Donation Platform. All Rights Reserved.</Typography>
+          <Typography variant="body2">&copy; 2026 Food Donation Platform. All Rights Reserved.</Typography>
       </Box>
     </div>
   );

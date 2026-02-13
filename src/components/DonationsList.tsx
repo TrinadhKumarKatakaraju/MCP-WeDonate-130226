@@ -3,17 +3,27 @@ import { db, auth } from '../firebase';
 import { collection, getDocs, query, where, doc, updateDoc } from 'firebase/firestore';
 import { List, ListItem, ListItemText, Button, Paper } from '@mui/material';
 
-const DonationsList = () => {
-  const [donations, setDonations] = useState<any[]>([]);
+interface Donation {
+  id: string;
+  foodType: string;
+  quantity: string;
+  expirationDate: string;
+  pickupLocation: string;
+  status?: string;
+  acceptedBy?: string;
+  donorId?: string;
+}
 
-  const fetchDonations = async () => {
-    const q = query(collection(db, "donations"), where("status", "==", "available"));
-    const querySnapshot = await getDocs(q);
-    const donationsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    setDonations(donationsData);
-  };
+const DonationsList = () => {
+  const [donations, setDonations] = useState<Donation[]>([]);
 
   useEffect(() => {
+    const fetchDonations = async () => {
+      const q = query(collection(db, "donations"), where("status", "==", "available"));
+      const querySnapshot = await getDocs(q);
+      const donationsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Donation));
+      setDonations(donationsData);
+    };
     fetchDonations();
   }, []);
 
@@ -28,7 +38,10 @@ const DonationsList = () => {
     });
 
     // Refresh the list of donations
-    fetchDonations();
+    const q = query(collection(db, "donations"), where("status", "==", "available"));
+    const querySnapshot = await getDocs(q);
+    const donationsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Donation));
+    setDonations(donationsData);
   };
 
   return (

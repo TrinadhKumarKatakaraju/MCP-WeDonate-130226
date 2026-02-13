@@ -3,8 +3,19 @@ import { db, auth } from '../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { List, ListItem, ListItemText, Typography, Paper } from '@mui/material';
 
+interface Donation {
+  id: string;
+  foodType: string;
+  quantity: string;
+  expirationDate: string;
+  pickupLocation: string;
+  status?: string;
+  acceptedBy?: string;
+  donorId?: string;
+}
+
 const MyDonations = () => {
-  const [donations, setDonations] = useState<any[]>([]);
+  const [donations, setDonations] = useState<Donation[]>([]);
   const user = auth.currentUser;
 
   useEffect(() => {
@@ -12,7 +23,7 @@ const MyDonations = () => {
     const fetchDonations = async () => {
       const q = query(collection(db, "donations"), where("donorId", "==", user.uid));
       const querySnapshot = await getDocs(q);
-      const donationsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const donationsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Donation));
       setDonations(donationsData);
     };
 

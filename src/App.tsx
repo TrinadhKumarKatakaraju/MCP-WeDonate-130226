@@ -14,6 +14,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import type { User } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
+import { Analytics } from './components/Analytics';
 
 const Home = () => (
   <Box>
@@ -85,6 +86,7 @@ function App() {
       display: 'flex',
       flexDirection: 'column'
     }}>
+      <Analytics />
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar>
           <IconButton

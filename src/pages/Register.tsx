@@ -1,4 +1,4 @@
-import { Container, Typography, TextField, Button, Box, RadioGroup, FormControlLabel, Radio, FormControl, FormLabel } from '@mui/material';
+import { Container, Typography, TextField, Button, Box, RadioGroup, FormControlLabel, Radio, FormControl, FormLabel, Paper } from '@mui/material';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -43,12 +43,16 @@ const Register = () => {
 
   return (
     <Container maxWidth="xs">
-      <Box
+      <Paper
+        elevation={3}
         sx={{
           marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          padding: 4,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          backdropFilter: 'blur(10px)',
         }}
       >
         <Typography component="h1" variant="h5">
@@ -111,7 +115,7 @@ const Register = () => {
             Already have an account? <Link to="/login">Login</Link>
           </Typography>
         </Box>
-      </Box>
+      </Paper>
     </Container>
   );
 };

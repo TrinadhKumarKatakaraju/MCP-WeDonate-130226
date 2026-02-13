@@ -1,4 +1,4 @@
-import { Stepper, Step, StepLabel, StepContent, Typography, Box } from '@mui/material';
+import { Stepper, Step, StepLabel, StepContent, Typography, Paper } from '@mui/material';
 import HowToReg from '@mui/icons-material/HowToReg';
 import Notifications from '@mui/icons-material/Notifications';
 import PinDrop from '@mui/icons-material/PinDrop';
@@ -53,7 +53,7 @@ const steps = [
 
 const NgoJourney = () => {
   return (
-    <Box sx={{ maxWidth: 800, margin: 'auto', padding: 4 }}>
+    <Paper sx={{ maxWidth: 800, margin: 'auto', padding: 4, backgroundColor: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(10px)', mt: 4 }}>
         <Typography variant="h4" gutterBottom>NGO Recipient Journey</Typography>
         <Stepper orientation="vertical">
         {steps.map((step, index) => (
@@ -69,7 +69,7 @@ const NgoJourney = () => {
             </Step>
         ))}
         </Stepper>
-    </Box>
+    </Paper>
   );
 };
 

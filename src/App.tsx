@@ -1,4 +1,5 @@
-import { AppBar, Toolbar, Typography, Button, Container, Box, Paper } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Container, Box, Paper, IconButton } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
 import Grid from '@mui/material/Grid';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import DonorJourney from './pages/DonorJourney';
@@ -86,6 +87,17 @@ function App() {
     }}>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar>
+          <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="home"
+              component={Link}
+              to="/"
+              sx={{ mr: 2, color: 'white' }}
+          >
+              <HomeIcon />
+          </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'white' }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
               Food Donation Platform
